@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New-Pair Radar — token launch radar</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>New-Pair Radar</h1>
+    <p class="sub">The token launches that are still early. Every protocol below records no token — ranked by what its token may be worth if its record stays as it is.</p>
+  </div>
+  <div class="meta" id="meta"></div>
+</header>
+
+<section class="stats" id="stats"></section>
+
+<section class="strip-wrap">
+  <div class="strip-head">
+    <h2>Fresh on the radar</h2>
+    <span class="hint">Listed in the last 180 days, hottest first</span>
+  </div>
+  <div class="strip" id="strip"></div>
+</section>
+
+<section class="panel controls">
+  <input id="q" type="search" placeholder="Search a protocol…" aria-label="Search protocols">
+  <select id="cat" aria-label="Filter by category"></select>
+  <select id="chain" aria-label="Filter by chain"></select>
+  <select id="sort" aria-label="Sort the board">
+    <option value="implied">Sort: implied value</option>
+    <option value="tvl">Sort: TVL</option>
+    <option value="growth">Sort: 7-day growth</option>
+    <option value="newest">Sort: newest first</option>
+  </select>
+  <label class="check"><input id="newOnly" type="checkbox"> New pairs only</label>
+  <label class="check"><input id="wlOnly" type="checkbox"> Watchlist only</label>
+  <div class="tabs" role="tablist">
+    <button id="tabBoard" class="tab on" type="button">Board</button>
+    <button id="tabLive" class="tab" type="button">Live tokens</button>
+  </div>
+</section>
+
+<section class="panel" id="detailWrap" hidden>
+  <div id="detail"></div>
+</section>
+
+<section class="panel">
+  <div class="count" id="count"></div>
+  <div class="table-wrap">
+    <table id="board">
+      <thead>
+        <tr>
+          <th>#</th><th>Protocol</th><th>Category</th><th>Chains</th>
+          <th class="num">TVL</th><th class="num">7d</th><th class="num">Age</th>
+          <th class="num">Implied value</th><th class="num">Freshness</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <table id="liveTable" hidden>
+      <thead>
+        <tr><th>Protocol</th><th>Category</th><th>Chains</th>
+        <th class="num">TVL</th><th class="num">Market cap</th><th class="num">7d</th></tr>
+      </thead>
+      <tbody id="liveRows"></tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="panel">
+  <h2>How the radar scores</h2>
+  <p>Implied value = TVL × 0.22 × growth × freshness × breadth. Growth is the 7-day TVL change, clamped to −80%…+200% and weighted 0.6. Freshness is the new-pair signal: a listing under 30 days old scores 1.60, under 90 days 1.45, under 180 days 1.30, under a year 1.15, under two years 1.00, older 0.90; an unknown listing date scores 1.00. Breadth adds 0.02 per extra chain, up to four. No protocol name is ever special-cased: the same function scores every row.</p>
+  <p>“Records no token” means DefiLlama's record carries no market cap, CoinGecko id or symbol for the protocol — never that it has none. A protocol on this board may still have a token its record does not carry. The board is the entry's own claim, not a prediction that a token will be issued, or when.</p>
+  <p class="faint" id="source"></p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
